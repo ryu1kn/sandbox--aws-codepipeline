@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "pipeline-test-ewn82mf"
-  acl    = "private"
+  force_destroy = true
 }
 
 resource "aws_iam_role" "codepipeline_role" {
