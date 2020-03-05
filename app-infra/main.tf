@@ -13,7 +13,6 @@ data "aws_region" "current" {}
 resource "aws_api_gateway_rest_api" "my_app" {
   name = "my_app"
 
-  # aws_lambda_function.my_app.invoke_arn can be used
   body = <<EOF
 {
   "swagger": "2.0",
@@ -48,7 +47,7 @@ resource "aws_api_gateway_rest_api" "my_app" {
               "statusCode": "200"
             }
           },
-          "uri": "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${aws_lambda_function.my_app.arn}/invocations",
+          "uri": "${aws_lambda_function.my_app.invoke_arn}",
           "passthroughBehavior": "when_no_match",
           "httpMethod": "POST",
           "cacheNamespace": "borr54",
